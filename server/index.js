@@ -22,7 +22,7 @@ dotenv.config()
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const port = process.env.BASE_URL_PORT || 3005
+const port = process.env.BASE_URL_PORT|| 3005
 
 const swaggerOptions = {
   definition: {

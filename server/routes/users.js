@@ -2,7 +2,7 @@
 // A. LIBRERÍAS
 import express from "express"
 // B. ARCHIVOS
-import usersController from "./../controllers/usersControllers.js"
+import usersControllers from "./../controllers/usersControllers.js"
 
 // 2. INICIALIZADORES
 const router = express.Router()
@@ -17,7 +17,9 @@ const router = express.Router()
  *      tags: [Usuarios]
  */
 
-router.get("/", usersController.readAll)
+router.get("/", usersControllers.readAll)
+
+router.post("/create", usersControllers.create)
 
 // 4. EXPORTACIÓN
 export default router
