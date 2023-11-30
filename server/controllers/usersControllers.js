@@ -1,5 +1,6 @@
 import User from "../models/User.js"
 import bcryptjs from "bcryptjs"
+import jwt from "jsonwebtoken"
 
 export const readAll = async (req,res) => {
     try {
@@ -30,12 +31,35 @@ export const create =async(req,res) => {
         password : hashedPassword, 
         })
 
-        return res.json({
-            msg: "user  added",
-            data: newUser,
-        })
+        const payload = {
+            user: {
+                id: newUser_id,
+            }
+        }
 
-   } catch (error){
+        jwt.sign (
+            payload,
+            process.env.JWT_SECRET,
+            {
+                expiresin: 360000
+            }, (error, token) => {
+                if (error){
+                    console.log("error", error)
+                    return new Error(error)
+                }
+                return res.json({
+                    msg: "user  added in cure manner",
+                    data: token,
+                })
+        
+
+
+            }
+        )
+
+        
+
+   } catch (error) {
     console.log ("error", error)
     res.status(500).json({
         msg:"Hubo un error obteniendo los datos"
