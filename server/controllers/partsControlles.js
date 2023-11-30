@@ -1,7 +1,13 @@
-export const readAll = (req,res) => {
+import Part from "../models/Part.js"
+
+export const readAll = async (req,res) => {
     try {
+
+        const parts = await Part.find()
+
         res.json({
-            msg: "parts displayed"
+            msg: "bikes displayed",
+            data: parts,
         })
     } catch(error) {
         console.log("error", error)
@@ -11,3 +17,4 @@ export const readAll = (req,res) => {
   export default {
     readAll,
   }
+  

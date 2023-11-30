@@ -1,7 +1,13 @@
-export const readAll = (req,res) => {
+import User from "../models/User.js"
+
+export const readAll = async (req,res) => {
     try {
+
+        const users = await User.find()
+
         res.json({
-            msg: "user displayed"
+            msg: "bikes displayed",
+            data: users,
         })
     } catch(error) {
         console.log("error", error)
