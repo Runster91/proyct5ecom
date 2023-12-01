@@ -7,6 +7,7 @@ import swaggerUI from "swagger-ui-express"
 import swaggerJSDoc from "swagger-jsdoc"
 import path, { dirname } from "path"
 import { fileURLToPath } from "url"
+import connectDB from "./config/db.js"
 
 // B. ARCHIVOS
 import bikesRoute from "./routes/bikes.js"
@@ -36,7 +37,7 @@ const swaggerOptions = {
 }
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions)
-
+connectDB()
 // 3. RUTAS
 
 // A. APLICACIÓN
@@ -50,4 +51,4 @@ app.use("/api/v1/parts", partsRoute)
 app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 
 // 4. LEVANTAMIENTO DEL SERVIDOR
-app.listen(port, () => console.log("Servidor está activo."))
+app.listen(port, () => console.log(`Servidor está activo y corriendo en el puerto ${port}`))

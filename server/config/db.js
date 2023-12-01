@@ -2,10 +2,7 @@ import mongoose from "mongoose"
 
 const connectDB = async () => {
     try{
-        await mongoose.connect(process.env.BASE_URL_DB_LOCAL,{
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        })
+        await mongoose.connect(process.env.BASE_URL_DB_LOCAL)
 
         console.log("Base de datos conectada")
     } catch (error) {
