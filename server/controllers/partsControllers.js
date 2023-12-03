@@ -69,11 +69,7 @@ export const create =async(req,res) => {
     console.log("error", error)
 }
 
-console.log("stripePrices", stripePrices)
-return res.status(200).json({
-    msg: "Parte creada en stripe",
-    data: stripePrices
-})
+
 
 
      //product on db
