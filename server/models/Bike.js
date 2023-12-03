@@ -13,7 +13,15 @@ const bikeSchema = mongoose.Schema({
         type: Number,
         requied: true
     },
-    image: {
+    currency: {
+        type: String,
+        requied: true
+    },
+    id: {
+        type: String,
+        requied: true
+    },
+    images: {
         type: String,
         required: false
     },
