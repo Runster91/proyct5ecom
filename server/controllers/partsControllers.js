@@ -1,5 +1,8 @@
 import Part from "../models/Part.js"
 import stripe from "stripe"
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const stripekey = stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -22,19 +25,19 @@ export const readAll = async (req,res) => {
 
 export const create =async(req,res) => {
 
-    const{model,brand, price, availability,images,currency,id} = req.body
+    const{model,brand, price, availability,image,currency,id} = req.body
 
     console.log(req.body)
     //product on  stripe
     try {
-        const product = await stripe.ProductsResource.create({
+        const product = await stripekey.products.create({
             model,
             brand,
             price,
             availability,
             currency,
             id,
-            images: [...img],
+            image: [...img],
             
             metadata: {
                 productDescription: description,

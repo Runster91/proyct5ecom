@@ -21,9 +21,9 @@ const partSchema = mongoose.Schema({
         type: String,
         requied: true
     },
-    images: {
+    image: {
         type: String,
-        required: false
+        required: true
     },
     Availability: {
         type: Boolean,
