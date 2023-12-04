@@ -25,7 +25,7 @@ export const readAll = async (req,res) => {
 
 export const create =async(req,res) => {
 
-    const{model,brand, price, availability,image,currency,id} = req.body
+    const{model,brand, prices, availability,img,currency,id} = req.body
 
     console.log(req.body)
     //product on  stripe
@@ -33,7 +33,7 @@ export const create =async(req,res) => {
         const product = await stripekey.products.create({
             model,
             brand,
-            price,
+            prices,
             availability,
             currency,
             id,
@@ -55,16 +55,42 @@ export const create =async(req,res) => {
                 currency,
                 product: product.id,
                 unit_amount: priceOBJ.price,
-                nickname: priceOBJ.weight
+                nickname: priceOBJ.weight,
+
+                metadata: {
+                    weight: priceOBJ.weight,
+                    priceDescription: priceOBJ.description
+                }
             })
         })
     )
 
     console.log("stripePrices", stripePrices)
 
+    const partsPrices = stripePrices.map((priceOBJ) =>{
+        return{
+            id: priceOBJ.id,
+            weight: priceOBJ.metadata.weight,
+            priceDescription: priceOBJ.metadta.priceDescription,
+            price: priceOBJ.unit_amount
+        }
+
+    })
+
+    const newPartsDB = await Part.create({
+        idStripe: product.id,
+        model: product.model,
+        prices: partsPrices,
+        img,
+        currency,
+        description: product.description,
+        slug
+    })
+
+
     return res.status(200).json({
-        msg: "producto creado en stripe",
-        data: stripePrices,
+        msg: "producto creado en stripe y  db",
+        data: newPartsDB,
     })
     
     
@@ -75,31 +101,7 @@ export const create =async(req,res) => {
 
 
 
-     //product on db
-//     try{
-//         const{model,brand, price, availability,image} = req.body
-        
-//         const newBike = await Bike.create({
-//         model,
-//         brand,
-//         price,
-//         availability,
-//         currency,
-//         id,
-//         images   
-//         })
-
-//         return res.json({
-//             msg: "bike  added",
-//             data: newBike,
-//         })
-
-//    } catch (error){
-//     console.log ("error", error)
-//     res.status(500).json({
-//         msg:"Hubo un error obteniendo los datos"
-//     })
-//  }  
+    
 }
 
 

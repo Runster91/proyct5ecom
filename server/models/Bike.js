@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const bikeSchema = mongoose.Schema({
+    idStripe:{
+        type: String,
+        required: true
+    },
     model: {
         type: String,
         required: true
@@ -9,26 +13,48 @@ const bikeSchema = mongoose.Schema({
         type: String,
         requied: true
     },
-    price: {
-        type: Number,
-        requied: true
-    },
+    prices: [
+        {
+            id: {
+                type: String,
+                required: true
+            },
+            weight: {
+                type: Number,
+                required: true
+            },
+            price: {
+                type: Number,
+                required: true
+            },
+            priceDescription: {
+                type: String,
+                required: true
+            }
+        }
+    ],
     currency: {
         type: String,
         requied: true
     },
-    id: {
-        type: String,
-        requied: true
-    },
-    image: {
-        type: String,
+   
+    img: {
+        type: Array,
         required: true
     },
     Availability: {
         type: Boolean,
         default: true
-    }
+    },
+    description: {
+        type: String,
+        required:true
+    },
+    slug: {
+        type: String,
+        required: true,
+        unique: true
+    },
 })
 
 const Bike = mongoose.model("Bike", bikeSchema)

@@ -24,7 +24,7 @@ export const readAll = async (req,res) => {
 
     export const create =async(req,res) => {
 
-        const{model,brand, price, availability,image,currency,id} = req.body
+        const{model,brand, prices, availability,img,currency,id} = req.body
 
         console.log(req.body)
         //product on  stripe
@@ -32,7 +32,7 @@ export const readAll = async (req,res) => {
             const product = await stripekey.products.create({
                 model,
                 brand,
-                price,
+                prices,
                 availability,
                 currency,
                 id,
@@ -61,9 +61,29 @@ export const readAll = async (req,res) => {
 
         console.log("stripePrices", stripePrices)
 
+        const bikePrices = stripePrices.map((priceOBJ) =>{
+            return{
+                id: priceOBJ.id,
+                weight: priceOBJ.metadata.weight,
+                priceDescription: priceOBJ.metadta.priceDescription,
+                price: priceOBJ.unit_amount
+            }
+    
+        })
+    
+        const newBikesDB = await Part.create({
+            idStripe: product.id,
+            model: product.model,
+            prices: bikePrices,
+            img,
+            currency,
+            description: product.description,
+            slug
+        })
+
         return res.status(200).json({
             msg: "producto creado en stripe",
-            data: stripePrices,
+            data: newBikesDB,
         })
 
        
