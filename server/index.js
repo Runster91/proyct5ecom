@@ -13,6 +13,7 @@ import connectDB from "./config/db.js"
 import bikesRoute from "./routes/bikes.js"
 import partsRoute from "./routes/parts.js"
 import usersRoute from  "./routes/users.js"
+import checkoutRoute from "./routes/checkout.js"
 
 // 2. INICIALIZADORES
 const app = express()
@@ -46,6 +47,8 @@ connectDB()
 app.use("/api/v1/users", usersRoute)
 app.use("/api/v1/bikes", bikesRoute)
 app.use("/api/v1/parts", partsRoute)
+app.use("/api/v1/checkout", checkoutRoute)
+
 
 // B. DOCUMENTACIÓN
 app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocs))
