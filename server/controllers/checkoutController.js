@@ -19,7 +19,7 @@ const line_items= [
     }
 ]
 try {
-    const session = await stripekey.checkout.session.create({
+    const session = await stripekey.checkout.sessions.create({
         line_items,
         mode: "payments",
         succes_url: "https://buy.stripe.com/test_6oE5lyct46U9eDm9AB",
