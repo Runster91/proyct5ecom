@@ -25,7 +25,7 @@ export const readAll = async (req,res) => {
 
 export const create =async(req,res) => {
 
-    const{model,brand, prices, availability,img,currency,id,description} = req.body
+    const{model,brand, prices, availability,img,currency,id,description,slug} = req.body
 
     console.log(req.body)
     //product on  stripe
