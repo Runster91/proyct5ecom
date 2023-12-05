@@ -24,7 +24,7 @@ export const readAll = async (req,res) => {
 
     export const create =async(req,res) => {
 
-        const{model,brand, prices, availability,img,currency,id} = req.body
+        const{model,brand, prices, availability,img,currency,id,description} = req.body
 
         console.log(req.body)
         //product on  stripe
@@ -42,7 +42,7 @@ export const readAll = async (req,res) => {
                     productDescription: description,
                     slug
                 }
-            })
+            });
 
             console.log("product", product)
         
@@ -89,7 +89,7 @@ export const readAll = async (req,res) => {
        
         
     } catch (error) {
-        console.log("error", error)
+        console.log("error", error);
     }
 
 
