@@ -44,6 +44,15 @@ try {
 
 }
 
+const createOrder = async (req,res) =>{
+
+
+    res.status(200).json({
+        msg: "Datos de Stripe recibidos.",
+    })
+}
+
 export default{
-    createCheckoutSession
+    createCheckoutSession,
+    createOrder
 }
