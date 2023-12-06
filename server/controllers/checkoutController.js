@@ -45,7 +45,63 @@ try {
 }
 
 const createOrder = async (req,res) =>{
+    // const sig = req.headers["stripe-signature"]
+    // const endpointSecret = process.env.STRIPE_WH_SIGNIN_SE
+    // console.log(req.body)
+    // console.log(sig)
+    // console.log(endpointSecret)
+    
+    // let event
+    // try {
+    //     event =stripekey.webhooks.constructEvent(req.body, sig, endpointSecret)
+    // } catch (error) {
+    //     console.log("error", error)
+    //     res.status(400).json({
+    //         msg: error
+    //     })
+    // }
+    const paymentIntent = req.body.session.data.object
+    const email = paymentIntent.recipt_url
+    const receiptID = receiptURL.split("/").filter((item) => item).pop
+    const amount = paymentIntent.amount
+    const date_created = paymentIntent.created
 
+    const paymentDB = User.findOneAndUpdate({email}, 
+        {
+            $push: {
+                receipts:{
+                    receiptURL,
+                    receiptID,
+                    date_created,
+                    amount,
+                },
+            },
+        }, 
+
+        {new: true}
+        )
+
+    console.log ("req.body", req.body)
+    console.log("req.body", req.body.session)
+    try {
+        switch(true){
+            case "charge.succeeded":
+                default: 
+                console.log("Evento no encontrado")
+
+                res.status(200).json({
+                    msg: "evento no encontrado",
+                })
+
+               
+
+        }
+    } catch (error) {
+        console.log ("error", error)
+        res.status(400).json({
+            msg:error,
+        })
+    }
 
     res.status(200).json({
         msg: "Datos de Stripe recibidos.",
