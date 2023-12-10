@@ -13,6 +13,7 @@ const createCheckoutSession = async (req, res) => {
   const userID = req.user.id
   console.log(userID)
 
+
   // 2. BUSCAR EN BASE DE DATOS
   const foundUser = await User.findById(userID).lean()
   console.log(foundUser)
@@ -40,7 +41,7 @@ const createCheckoutSession = async (req, res) => {
     const session = await stripeKey.checkout.sessions.create({
       line_items,
       mode: "payment",
-      success_url: "https://google.com",
+      success_url: "https://checkout.stripe.com/c/pay/",
       cancel_url: "https://yahoo.com",
       customer_email: foundUser.email,
     })
