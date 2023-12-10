@@ -1,62 +1,35 @@
-import mongoose from "mongoose";
+// 1. IMPORTACIÓN
+import mongoose from "mongoose"
 
-const partSchema = mongoose.Schema({
-    idStripe:{
-        type: String,
-        required: true
-    },
-    model: {
-        type: String,
-        required: true
-    },
-    brand:{
-        type: String,
-        required: true
-    },
-    prices: [
-        {
-            id: {
-                type: String,
-                required: true
-            },
-            weight: {
-                type: Number,
-                required: true
-            },
-            price: {
-                type: Number,
-                required: true
-            },
-            priceDescription: {
-                type: String,
-                required: true
-            }
-        }
-    ],
-    currency: {
-        type: String,
-        required: true
-    },
-    
-    img: {
-        type: Array,
-        required: true
-    },
-    Availability: {
-        type: Boolean,
-        default: true
-    },
-    description: {
-        type: String,
-        required:true
-    },
-    slug: {
-        type: String,
-        required: true,
-        unique: true
-    },
+// 2. SCHEMA
+
+const partsSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  slug: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: false,
+  },
+  availability: {
+    type: Boolean,
+    default: true,
+  },
 })
 
-const Part = mongoose.model("Part", partSchema)
+// 3. MODELO
+const Part = mongoose.model("Part", partsSchema)
 
+// 4. EXPORTACIÓN
 export default Part

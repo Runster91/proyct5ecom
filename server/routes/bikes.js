@@ -8,4 +8,10 @@ router.get("/", bikesControllers.readAll)
 
 router.post("/create", bikesControllers.create)
 
+router.get("/readone/:id",bikesControllers.readOne)
+
+router.put("/update/:id", bikesControllers.edit)
+
+router.delete("/deleteone/:id",bikesControllers.deleteOne)
+
 export default router
