@@ -47,7 +47,7 @@ function Router() {
                 />
                 <Route path="/bikes" element={< BikesPage />} />
                 <Route path="/bikes/:slug" element={
-                  <p>Esta es una gran  bici</p>
+                  <BikePage />
                 }  />
               </Route>
             </Routes>
