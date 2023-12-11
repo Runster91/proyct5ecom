@@ -54,7 +54,7 @@ const BikeState = (props) => {
     const { data: dataBike } = data
 
     dispatch({
-      type: "GET_BICI",
+      type: "GET_BIKES",
       payload: dataBike,
     })
   }

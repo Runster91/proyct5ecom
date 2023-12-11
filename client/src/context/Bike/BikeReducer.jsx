@@ -1,4 +1,4 @@
-const BikeReducer = (globalState, action) => {
+ const BikeReducer = (globalState, action) => {
     switch (action.type) {
       case "GET_BIKES":
         return {
@@ -6,7 +6,7 @@ const BikeReducer = (globalState, action) => {
           bikes: action.payload,
         }
   
-      case "GET_PIZZA":
+      case "GET_BIKE":
         return {
           ...globalState,
           bike: {

@@ -1,4 +1,3 @@
-// ./src/components/Layout/index.jsx
 
 import { Outlet } from "react-router-dom"
 
@@ -8,6 +7,7 @@ import Footer from "./Footer"
 function Layout() {
   return (
     <>
+  
       <header>
         <Header />
       </header>

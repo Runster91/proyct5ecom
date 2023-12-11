@@ -4,7 +4,7 @@ import { useContext, useEffect } from "react"
 import BikeContext from "../../context/Bike/BikeContext"
 import { Link } from "react-router-dom"
 
-function bikesPage() {
+function BikesPage() {
   // TRAERME LOS DATOS DE LAS PIZZAS DEL SERVER
   const bikeCtx = useContext(BikeContext)
 
@@ -37,4 +37,4 @@ function bikesPage() {
   )
 }
 
-export default bikesPage
+export default BikesPage

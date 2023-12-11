@@ -45,8 +45,10 @@ function Router() {
                     </>
                   }
                 />
-                <Route path="/bikes" element={<bikesPage />} />
-                <Route path="/bike/:slug" element={<bikePage />} />
+                <Route path="/bikes" element={< BikesPage />} />
+                <Route path="/bikes/:slug" element={
+                  <p>Esta es una gran  bici</p>
+                }  />
               </Route>
             </Routes>
           </BrowserRouter>
